@@ -1,0 +1,87 @@
+﻿@model IEnumerable<API_DragonSushi.Models.Produto>
+
+@{
+    ViewBag.Title = "Cardapio";
+}
+
+<h2>Cardapio</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idProd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeProd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imgProd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descrProd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estoque)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ingrediente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fkCategoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qntdProd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fkUnMedida)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idProd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeProd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imgProd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descrProd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.preco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estoque)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ingrediente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fkCategoria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qntdProd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fkUnMedida)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

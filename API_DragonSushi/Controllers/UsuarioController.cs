@@ -6,20 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
+using API_DragonSushi.ViewModel;
 
 namespace API_DragonSushi.Controllers
 {
-    public class UsuarioController : ApiController
+    public class UsuarioController : Controller
     {
         // GET: api/Usuario
-        [HttpPost]
-        public void Post([FromBody] Usuario usuario, Pessoa pessoa)
+        [System.Web.Http.HttpPost]
+        public void CadastrarUsuario([FromBody] UsuarioViewModel vmUsuario )
+
         {
-            if (usuario == null && pessoa == null)
+            if (vmUsuario == null)
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
 
             var DAO = new DAO();
-            DAO.spCadastrarUsuario(usuario, pessoa);
+                DAO.CadastrarUsuario(vmUsuario);
+  
         }
+       
     }
 }

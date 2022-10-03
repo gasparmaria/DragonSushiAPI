@@ -10,11 +10,11 @@ namespace API_DragonSushi.Data
 {
     public class DataBase : IDisposable
     {
-        private readonly MySqlConnection conexao;
-        public DataBase()
+        MySqlConnection conexao = new MySqlConnection(ConfigurationManager.ConnectionStrings["conexao"].ConnectionString);
+        public MySqlConnection conectarDb()
         {
-            conexao = new MySqlConnection(ConfigurationManager.ConnectionStrings["conexao"].ConnectionString);
             conexao.Open();
+            return conexao;
         }
         public void ExecutaComando(string StrQuery)
         {
