@@ -1,0 +1,35 @@
+﻿@model IEnumerable<API_DragonSushi.ViewModel.UsuarioViewModel>
+
+@{
+    ViewBag.Title = "Listar Usuarios";
+}
+
+<h2>ListarUsuarios</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Pessoa.nomePessoa)</td>
+        <td>@Html.DisplayNameFor(model => model.Pessoa.telefone)</td>
+        <td>@Html.DisplayNameFor(model => model.Pessoa.cpf)</td>
+        <td>@Html.DisplayNameFor(model => model.Usuario.login)</td>
+        <td>@Html.DisplayNameFor(model => model.Usuario.senha)</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Pessoa.nomePessoa</td>
+            <td>@item.Pessoa.telefone</td>
+            <td>@item.Pessoa.cpf</td>
+            <td>@item.Usuario.login</td>
+            <td>@item.Usuario.senha</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+</table>

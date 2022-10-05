@@ -27,11 +27,11 @@ namespace API_DragonSushi.Models
             MySqlCommand exibir = new MySqlCommand("call spExibirCardapio()", db.conectarDb());
             var dados = exibir.ExecuteReader();
 
-            return dadosReaderList(dados);
+            return readerToList(dados);
 
         }
 
-        public List<Produto> dadosReaderList(MySqlDataReader dados)
+        public List<Produto> readerToList(MySqlDataReader dados)
         {
             var cardapio = new List<Produto>();
             if (dados.HasRows)
@@ -40,8 +40,6 @@ namespace API_DragonSushi.Models
                 {
                     var produto = new Produto()
                     {
-
-
                         idProd = Convert.ToInt32(dados["idProd"]),
                         nomeProd = Convert.ToString(dados["nomeProd"]),
                         imgProd = Convert.ToString(dados["imgProd"]),
@@ -53,7 +51,6 @@ namespace API_DragonSushi.Models
                         qntdProd = 0,
                         fkUnMedida = 0
                     };
-
                     cardapio.Add(produto);
                 }
             }

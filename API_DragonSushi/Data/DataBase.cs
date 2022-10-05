@@ -16,6 +16,12 @@ namespace API_DragonSushi.Data
             conexao.Open();
             return conexao;
         }
+
+        public MySqlConnection desconectarDb()
+        {
+            conexao.Close();
+            return conexao;
+        }
         public void ExecutaComando(string StrQuery)
         {
             var vComando = new MySqlCommand
