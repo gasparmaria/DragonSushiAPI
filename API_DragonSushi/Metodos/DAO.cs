@@ -31,6 +31,51 @@ namespace API_DragonSushi.Metodos
             db.desconectarDb();
         }
         //-----------------------------------------------------------------------------------------------------------------------------
+        //MPETODO DE INSERÇÃO: FUNCIONÁRIO
+        public void cadastrarFuncionario(FuncionarioViewModel vmFuncionario)
+        {
+            DataBase db = new DataBase();
+
+            string insertQuery = String.Format("call spCadastrarFuncionario(@nomePessoa,@telefone,@cpf,@login,@senha)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@nomePessoa", MySqlDbType.VarChar).Value = vmFuncionario.Pessoa.nomePessoa;
+            command.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = vmFuncionario.Pessoa.telefone;
+            command.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = vmFuncionario.Pessoa.cpf;
+            command.Parameters.Add("@login", MySqlDbType.VarChar).Value = vmFuncionario.Usuario.login;
+            command.Parameters.Add("@senha", MySqlDbType.VarChar).Value = vmFuncionario.Usuario.senha;
+
+            command.ExecuteNonQuery();
+            db.desconectarDb();
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------
+        //MÉTODO DE INSERÇÃO: CLIENTE
+        public void cadastrarCliente(ClienteViewModel vmCliente)
+        {
+            DataBase db = new DataBase();
+
+            string insertQuery = String.Format("spCadastrarCliente(@nomePessoa,@telefone,@cpf)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@nomePessoa", MySqlDbType.VarChar).Value = vmCliente.Pessoa.nomePessoa;
+            command.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = vmCliente.Pessoa.telefone;
+            command.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = vmCliente.Pessoa.cpf;
+
+            command.ExecuteNonQuery();
+            db.desconectarDb();
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------
+        // MÉTODO DE INERTÇÃO: COMANDA
+        public void cadastrarComanda(Comanda comanda)
+        {
+            DataBase db = new DataBase();
+
+            string insertQuery = String.Format("spCadastrarComanda(@numMesa)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@numMesa", MySqlDbType.Int16).Value = comanda.numMesa;
+
+            command.ExecuteNonQuery();
+            db.desconectarDb();
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------
         //MÉTODO DE INSERÇÃO:PRODUTO
         public void cadastrarProduto(ProdutoViewModel vmProduto)
         {
@@ -41,7 +86,7 @@ namespace API_DragonSushi.Metodos
             command.Parameters.Add("@nomeProd", MySqlDbType.VarChar).Value = vmProduto.Produto.nomeProd;
             command.Parameters.Add("@imgProd", MySqlDbType.VarChar).Value = vmProduto.Produto.imgProd;
             command.Parameters.Add("@descrProd", MySqlDbType.VarChar).Value = vmProduto.Produto.descrProd;
-            command.Parameters.Add("@preco", MySqlDbType.VarChar).Value = vmProduto.Produto.preco;
+            command.Parameters.Add("@preco", MySqlDbType.Decimal).Value = vmProduto.Produto.preco;
             command.Parameters.Add("@estoque", MySqlDbType.Byte).Value = vmProduto.Produto.estoque;
             command.Parameters.Add("@ingrediente", MySqlDbType.Byte).Value = vmProduto.Produto.ingrediente;
             command.Parameters.Add("@categoria", MySqlDbType.VarChar).Value = vmProduto.Categoria.categoria;
@@ -51,6 +96,8 @@ namespace API_DragonSushi.Metodos
             command.ExecuteNonQuery();
             db.desconectarDb();
         }
+
+
         //-----------------------------------------------------------------------------------------------------------------------------
         //MÉTODO DE INSERÇÃO: FUNCIONÁRIO
         public void CadastrarFuncionario(Usuario usuario, Pessoa pessoa)
