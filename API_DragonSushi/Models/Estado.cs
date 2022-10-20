@@ -7,6 +7,6 @@ namespace API_DragonSushi.Models
 {
     public class Estado
     {
-        public int idEstado { get; set; }
+        public string idEstado { get; set; }
     }
 }

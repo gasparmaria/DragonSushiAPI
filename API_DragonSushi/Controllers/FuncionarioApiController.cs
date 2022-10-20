@@ -1,4 +1,5 @@
 ﻿using API_DragonSushi.Metodos;
+using API_DragonSushi.Models;
 using API_DragonSushi.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,14 @@ namespace API_DragonSushi.Controllers
 {
     public class FuncionarioApiController : ApiController
     {
+        [HttpGet]
+        public Pessoa Get(string nomePessoa)
+        {
+            DAO dao = new DAO();
+            var funcionario = dao.ConsultarFuncionarioPeloNome(nomePessoa);
+            return funcionario;
+        }
+
         [HttpPost]
         public void Post([FromBody] FuncionarioViewModel vmFuncionario)
         {

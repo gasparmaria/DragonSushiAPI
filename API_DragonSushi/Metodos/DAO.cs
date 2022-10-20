@@ -47,6 +47,40 @@ namespace API_DragonSushi.Metodos
             command.ExecuteNonQuery();
             db.desconectarDb();
         }
+
+        //MÉTODO DE CONSULTA FUNCIONARIO PELO NOME DO FUNCIONÁRIO
+        public Pessoa ConsultarFuncionarioPeloNome(string nomePessoa)
+        {
+            DataBase db = new DataBase();
+            {
+                string strQuery = string.Format("spConsultarFuncionario(nomePessoa);", nomePessoa);
+                var leitor = db.RetornaComando(strQuery);
+
+                return GerarListaFuncionario(leitor).FirstOrDefault();
+            }
+        }
+        public List<Pessoa> GerarListaFuncionario(MySqlDataReader leitor)
+        {
+            var funcionario = new List<Pessoa>();
+
+            while (leitor.Read())
+            {
+                var lstFuncionario = new Pessoa()
+                {
+                    idPessoa = int.Parse(leitor["idPessoa"].ToString()),
+                    nomePessoa = leitor["nomePessoa"].ToString(),
+                    telefone = leitor["telefone"].ToString(),
+                    cpf = leitor["cpf"].ToString(),
+                    ocupacao = int.Parse(leitor["ocupacao"].ToString()),
+
+                };
+                funcionario.Add(lstFuncionario);
+            }
+            leitor.Close();
+            return funcionario;
+        }
+
+    
         //-----------------------------------------------------------------------------------------------------------------------------
         //MÉTODO DE INSERÇÃO: CLIENTE
         public void cadastrarCliente(ClienteViewModel vmCliente)
@@ -72,6 +106,8 @@ namespace API_DragonSushi.Metodos
             MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
             command.Parameters.Add("@numMesa", MySqlDbType.Int16).Value = comanda.numMesa;
 
+            
+            
             command.ExecuteNonQuery();
             db.desconectarDb();
         }
@@ -99,66 +135,79 @@ namespace API_DragonSushi.Metodos
 
 
         //-----------------------------------------------------------------------------------------------------------------------------
-        //MÉTODO DE INSERÇÃO: FUNCIONÁRIO
-        public void CadastrarFuncionario(Usuario usuario, Pessoa pessoa)
-        {            
-            var strQuery = "";
-            strQuery += string.Format("CALL spCadastrarFuncionario ('{0}','{1}','{2}','{3}','{4}')", 
-                                                                pessoa.nomePessoa, 
-                                                                pessoa.telefone, 
-                                                                pessoa.cpf, 
-                                                                usuario.login, 
-                                                                usuario.senha);
+        //MÉTODO DE INSERÇÃO: Endereco
+        public void cadastrarEndereco(EnderecoViewModel vmEndereco)
+        {
+            DataBase db = new DataBase();
 
-            using (db = new DataBase())
-            {
-                db.ExecutaComando(strQuery);
-            }
+            string insertQuery = String.Format("call spCadastrarEndereco(@numEndereco,@descrEndereco,@rua,@bairro,@cidade, @idEstado)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@numEndereco", MySqlDbType.VarChar).Value = vmEndereco.Endereco.numEndereco;
+            command.Parameters.Add("@descrEndereco", MySqlDbType.VarChar).Value = vmEndereco.Endereco.descrEndereco;
+            command.Parameters.Add("@rua", MySqlDbType.VarChar).Value = vmEndereco.Rua.rua;
+            command.Parameters.Add("@bairro", MySqlDbType.VarChar).Value = vmEndereco.Bairro.bairro;
+            command.Parameters.Add("@cidade", MySqlDbType.VarChar).Value = vmEndereco.Cidade.cidade;
+            command.Parameters.Add("@idEstado", MySqlDbType.VarChar).Value = vmEndereco.Estado.idEstado;
+
+
+            command.ExecuteNonQuery();
+            db.desconectarDb();
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------
-        //MÉTODO DE INSERÇÃO: CLIENTE
-        public void CadastrarCliente(Pessoa pessoa)
-        {
-            var strQuery = "";
-            strQuery += string.Format("CALL spCadastrarCliente ('{0}','{1}','{2}')", pessoa.nomePessoa, pessoa.telefone, pessoa.cpf);
+        //MÉTODO DE INSERÇÃO: Delivery
 
-            using (db = new DataBase())
-            {
-                db.ExecutaComando(strQuery);
-            }
+        public void cadastrarDelivery(DeliveryViewModel vmDelivery)
+        {
+            DataBase db = new DataBase();
+
+            string insertQuery = String.Format("call spCadastrarDelivery(@idPessoa,@idEndereco,@idComanda,@total,@formaPag)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@idPessoa", MySqlDbType.Int32).Value = vmDelivery.Pessoa.idPessoa;
+            command.Parameters.Add("@idEndereco", MySqlDbType.Int32).Value = vmDelivery.Endereco.idEndereco;
+            command.Parameters.Add("@idComanda", MySqlDbType.Int32).Value = vmDelivery.Comanda.idComanda;
+            command.Parameters.Add("@total", MySqlDbType.Decimal).Value = vmDelivery.Pagamento.total;
+            command.Parameters.Add("@formaPag", MySqlDbType.VarChar).Value = vmDelivery.FormaPg.formaPag;
+
+            command.ExecuteNonQuery();
+            db.desconectarDb();
         }
 
-        //------------------------------------------------------------------------------------------------------------------------------
-        //MÉTODO INSERÇÃO: COMANDA
-         public void CadastrarComanda(Comanda comanda)
-         {
-            var strQuery = "";
-            strQuery += string.Format("CALL spCadastrarComanda ({0})", comanda.numMesa);
+        //-----------------------------------------------------------------------------------------------------------------------------
+        //MÉTODO DE INSERÇÃO: RESERVA
 
-            using (db = new DataBase())
-            {
-                db.ExecutaComando(strQuery);
-            }
-         }
-
-        //------------------------------------------------------------------------------------------------------------------------------
-        //MÉTODO INSERÇÃO: ENDEREÇO
-        public void CadastrarEndereco(Endereco endereco, Bairro bairro, Cidade cidade, Estado estado, Rua rua)
+        public void cadastrarReserva(ReservaViewModel vmReserva)
         {
-            var strQuery = "";
-            strQuery += string.Format("CALL spCadastrarEndereco ({0}, '{1}', '{2}', '{3}', '{4}', '{5}')", 
-                                                            endereco.numEndereco, 
-                                                            endereco.descrEndereco, 
-                                                            rua.rua, 
-                                                            bairro.bairro, 
-                                                            cidade.cidade, 
-                                                            estado.idEstado);
+            DataBase db = new DataBase();
 
-            using (db = new DataBase())
-            {
-                db.ExecutaComando(strQuery);
-            }
+            string insertQuery = String.Format("call spCadastrarReserva(@dataReserva,@hora,@numPessoas,@cpf)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@dataReserva", MySqlDbType.Date).Value = vmReserva.Reserva.dataReserva;
+            command.Parameters.Add("@hora", MySqlDbType.Time).Value = vmReserva.Reserva.hora;
+            command.Parameters.Add("@numPessoas", MySqlDbType.Int32).Value = vmReserva.Reserva.numPessoas;
+            command.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = vmReserva.Pessoa.cpf;
+
+
+            command.ExecuteNonQuery();
+            db.desconectarDb();
         }
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+        //MÉTODO DE INSERÇÃO: PEDIDO
+        //public void cadastrarPedido(Pedido pedido)
+        //{
+        //    DataBase db = new DataBase();
+
+        //    string insertQuery = String.Format("call spCadastrarPedido(@qtdProd,@descrPedido,@fkProd,@fkComanda)");
+        //    MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+        //    command.Parameters.Add("@qtdProd", MySqlDbType.Int32).Value = pedido.qtdProd;
+        //    command.Parameters.Add("@descrPedido", MySqlDbType.VarChar).Value = pedido.descrPedido;
+        //    command.Parameters.Add("@fkProd", MySqlDbType.Int32).Value = pedido.fkProd;
+        //    command.Parameters.Add("@fkComanda", MySqlDbType.Int32).Value = pedido.fkComanda;
+
+
+        //    command.ExecuteNonQuery();
+        //    db.desconectarDb();
+        //}
     }
 }
