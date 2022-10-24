@@ -172,7 +172,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Metodos\ClienteDAO.cs" />
+    <Compile Include="Metodos\ComandaDAO.cs" />
     <Compile Include="Metodos\DAO.cs" />
+    <Compile Include="Metodos\FuncionarioDAO.cs" />
+    <Compile Include="Metodos\ProdutoDAO.cs" />
+    <Compile Include="Metodos\UsuarioDAO.cs" />
     <Compile Include="Models\Bairro.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Cidade.cs" />

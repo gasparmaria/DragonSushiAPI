@@ -17,7 +17,7 @@ namespace API_DragonSushi.Controllers
             if (comanda == null)
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
 
-            DAO dao = new DAO();
+            ComandaDAO dao = new ComandaDAO();
             dao.cadastrarComanda(comanda);
         }
     }

@@ -1,0 +1,64 @@
+﻿@model API_DragonSushi.ViewModel.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Cadastrar Usuario";
+}
+
+<h2>CadastrarUsuario</h2>
+
+
+@using (Html.BeginForm())
+{
+
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>
+            Dados do Usuário
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Pessoa.nomePessoa)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Pessoa.nomePessoa)
+                @Html.ValidationMessageFor(model => model.Pessoa.nomePessoa)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Pessoa.telefone)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Pessoa.telefone)
+                @Html.ValidationMessageFor(model => model.Pessoa.telefone)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Pessoa.cpf)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Pessoa.cpf)
+                @Html.ValidationMessageFor(model => model.Pessoa.cpf)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Usuario.login)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Usuario.login)
+                @Html.ValidationMessageFor(model => model.Usuario.login)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Usuario.senha)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Usuario.senha)
+                @Html.ValidationMessageFor(model => model.Usuario.senha)
+            </div>
+     
+            <p><input type="submit" value="Cadastrar" /></p>
+        </legend>
+    </fieldset>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}

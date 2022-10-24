@@ -1,0 +1,6 @@
+namespace API_DragonSushi.Areas.HelpPage.ModelDescriptions
+{
+    public class DictionaryModelDescription : KeyValuePairModelDescription
+    {
+    }
+}

@@ -14,124 +14,30 @@ namespace API_DragonSushi.Metodos
     public class DAO
     {
         private DataBase db;
+  
+        
 
-        public void cadastrarUsuario(UsuarioViewModel vmUsuario)
-        {
-            DataBase db = new DataBase();
-
-            string insertQuery = String.Format("call spCadastrarUsuario(@nomePessoa,@telefone,@cpf,@login,@senha)");
-            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
-            command.Parameters.Add("@nomePessoa", MySqlDbType.VarChar).Value = vmUsuario.Pessoa.nomePessoa;
-            command.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = vmUsuario.Pessoa.telefone;
-            command.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = vmUsuario.Pessoa.cpf;
-            command.Parameters.Add("@login", MySqlDbType.VarChar).Value = vmUsuario.Usuario.login;
-            command.Parameters.Add("@senha", MySqlDbType.VarChar).Value = vmUsuario.Usuario.senha;
-
-            command.ExecuteNonQuery();
-            db.desconectarDb();
-        }
-        //-----------------------------------------------------------------------------------------------------------------------------
-        //MPETODO DE INSERÇÃO: FUNCIONÁRIO
-        public void cadastrarFuncionario(FuncionarioViewModel vmFuncionario)
-        {
-            DataBase db = new DataBase();
-
-            string insertQuery = String.Format("call spCadastrarFuncionario(@nomePessoa,@telefone,@cpf,@login,@senha)");
-            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
-            command.Parameters.Add("@nomePessoa", MySqlDbType.VarChar).Value = vmFuncionario.Pessoa.nomePessoa;
-            command.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = vmFuncionario.Pessoa.telefone;
-            command.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = vmFuncionario.Pessoa.cpf;
-            command.Parameters.Add("@login", MySqlDbType.VarChar).Value = vmFuncionario.Usuario.login;
-            command.Parameters.Add("@senha", MySqlDbType.VarChar).Value = vmFuncionario.Usuario.senha;
-
-            command.ExecuteNonQuery();
-            db.desconectarDb();
-        }
-
-        //MÉTODO DE CONSULTA FUNCIONARIO PELO NOME DO FUNCIONÁRIO
-        public Pessoa ConsultarFuncionarioPeloNome(string nomePessoa)
-        {
-            DataBase db = new DataBase();
-            {
-                string strQuery = string.Format("spConsultarFuncionario(nomePessoa);", nomePessoa);
-                var leitor = db.RetornaComando(strQuery);
-
-                return GerarListaFuncionario(leitor).FirstOrDefault();
-            }
-        }
-        public List<Pessoa> GerarListaFuncionario(MySqlDataReader leitor)
-        {
-            var funcionario = new List<Pessoa>();
-
-            while (leitor.Read())
-            {
-                var lstFuncionario = new Pessoa()
-                {
-                    idPessoa = int.Parse(leitor["idPessoa"].ToString()),
-                    nomePessoa = leitor["nomePessoa"].ToString(),
-                    telefone = leitor["telefone"].ToString(),
-                    cpf = leitor["cpf"].ToString(),
-                    ocupacao = int.Parse(leitor["ocupacao"].ToString()),
-
-                };
-                funcionario.Add(lstFuncionario);
-            }
-            leitor.Close();
-            return funcionario;
-        }
-
-    
-        //-----------------------------------------------------------------------------------------------------------------------------
-        //MÉTODO DE INSERÇÃO: CLIENTE
-        public void cadastrarCliente(ClienteViewModel vmCliente)
-        {
-            DataBase db = new DataBase();
-
-            string insertQuery = String.Format("spCadastrarCliente(@nomePessoa,@telefone,@cpf)");
-            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
-            command.Parameters.Add("@nomePessoa", MySqlDbType.VarChar).Value = vmCliente.Pessoa.nomePessoa;
-            command.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = vmCliente.Pessoa.telefone;
-            command.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = vmCliente.Pessoa.cpf;
-
-            command.ExecuteNonQuery();
-            db.desconectarDb();
-        }
-        //-----------------------------------------------------------------------------------------------------------------------------
-        // MÉTODO DE INERTÇÃO: COMANDA
-        public void cadastrarComanda(Comanda comanda)
-        {
-            DataBase db = new DataBase();
-
-            string insertQuery = String.Format("spCadastrarComanda(@numMesa)");
-            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
-            command.Parameters.Add("@numMesa", MySqlDbType.Int16).Value = comanda.numMesa;
-
-            
-            
-            command.ExecuteNonQuery();
-            db.desconectarDb();
-        }
         //-----------------------------------------------------------------------------------------------------------------------------
         //MÉTODO DE INSERÇÃO:PRODUTO
-        public void cadastrarProduto(ProdutoViewModel vmProduto)
-        {
-            DataBase db = new DataBase();
+        //public void cadastrarProduto(ProdutoViewModel vmProduto)
+        //{
+        //    DataBase db = new DataBase();
 
-            string insertQuery = String.Format("call spCadastrarProduto(@nomeProd,@imgProd,@descrProd,@preco,@estoque, @ingrediente, @categoria, @qntdProd, @unMedida)");
-            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
-            command.Parameters.Add("@nomeProd", MySqlDbType.VarChar).Value = vmProduto.Produto.nomeProd;
-            command.Parameters.Add("@imgProd", MySqlDbType.VarChar).Value = vmProduto.Produto.imgProd;
-            command.Parameters.Add("@descrProd", MySqlDbType.VarChar).Value = vmProduto.Produto.descrProd;
-            command.Parameters.Add("@preco", MySqlDbType.Decimal).Value = vmProduto.Produto.preco;
-            command.Parameters.Add("@estoque", MySqlDbType.Byte).Value = vmProduto.Produto.estoque;
-            command.Parameters.Add("@ingrediente", MySqlDbType.Byte).Value = vmProduto.Produto.ingrediente;
-            command.Parameters.Add("@categoria", MySqlDbType.VarChar).Value = vmProduto.Categoria.categoria;
-            command.Parameters.Add("@qntdProd", MySqlDbType.Decimal).Value = vmProduto.Produto.qntdProd;
-            command.Parameters.Add("@unMedida", MySqlDbType.VarChar).Value = vmProduto.UnMedida.unMedida;
+        //    string insertQuery = String.Format("call spCadastrarProduto(@nomeProd,@imgProd,@descrProd,@preco,@estoque, @ingrediente, @categoria, @qntdProd, @unMedida)");
+        //    MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+        //    command.Parameters.Add("@nomeProd", MySqlDbType.VarChar).Value = vmProduto.Produto.nomeProd;
+        //    command.Parameters.Add("@imgProd", MySqlDbType.VarChar).Value = vmProduto.Produto.imgProd;
+        //    command.Parameters.Add("@descrProd", MySqlDbType.VarChar).Value = vmProduto.Produto.descrProd;
+        //    command.Parameters.Add("@preco", MySqlDbType.Decimal).Value = vmProduto.Produto.preco;
+        //    command.Parameters.Add("@estoque", MySqlDbType.Byte).Value = vmProduto.Produto.estoque;
+        //    command.Parameters.Add("@ingrediente", MySqlDbType.Byte).Value = vmProduto.Produto.ingrediente;
+        //    command.Parameters.Add("@categoria", MySqlDbType.VarChar).Value = vmProduto.Categoria.categoria;
+        //    command.Parameters.Add("@qntdProd", MySqlDbType.Decimal).Value = vmProduto.Produto.qntdProd;
+        //    command.Parameters.Add("@unMedida", MySqlDbType.VarChar).Value = vmProduto.UnMedida.unMedida;
 
-            command.ExecuteNonQuery();
-            db.desconectarDb();
-        }
+        //    command.ExecuteNonQuery();
+        //    db.desconectarDb();
+        //}
 
 
         //-----------------------------------------------------------------------------------------------------------------------------
@@ -194,20 +100,20 @@ namespace API_DragonSushi.Metodos
 
         //-----------------------------------------------------------------------------------------------------------------------------
         //MÉTODO DE INSERÇÃO: PEDIDO
-        //public void cadastrarPedido(Pedido pedido)
-        //{
-        //    DataBase db = new DataBase();
+        public void cadastrarPedido(Pedido pedido)
+        {
+            DataBase db = new DataBase();
 
-        //    string insertQuery = String.Format("call spCadastrarPedido(@qtdProd,@descrPedido,@fkProd,@fkComanda)");
-        //    MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
-        //    command.Parameters.Add("@qtdProd", MySqlDbType.Int32).Value = pedido.qtdProd;
-        //    command.Parameters.Add("@descrPedido", MySqlDbType.VarChar).Value = pedido.descrPedido;
-        //    command.Parameters.Add("@fkProd", MySqlDbType.Int32).Value = pedido.fkProd;
-        //    command.Parameters.Add("@fkComanda", MySqlDbType.Int32).Value = pedido.fkComanda;
+            string insertQuery = String.Format("call spCadastrarPedido(@qtdProd,@descrPedido,@fkProd,@fkComanda)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@qtdProd", MySqlDbType.Int32).Value = pedido.qtdProd;
+            command.Parameters.Add("@descrPedido", MySqlDbType.VarChar).Value = pedido.descrPedido;
+            command.Parameters.Add("@fkProd", MySqlDbType.Int32).Value = pedido.fkProd;
+            command.Parameters.Add("@fkComanda", MySqlDbType.Int32).Value = pedido.fkComanda;
 
 
-        //    command.ExecuteNonQuery();
-        //    db.desconectarDb();
-        //}
+            command.ExecuteNonQuery();
+            db.desconectarDb();
+        }
     }
 }

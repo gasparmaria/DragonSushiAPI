@@ -17,7 +17,7 @@ namespace API_DragonSushi.Controllers
             if (vmCliente == null)
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
 
-            DAO dao = new DAO();
+            ClienteDAO dao = new ClienteDAO();
             dao.cadastrarCliente(vmCliente);
         }
     }
