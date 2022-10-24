@@ -53,7 +53,7 @@ namespace API_DragonSushi.Metodos
         {
             DataBase db = new DataBase();
 
-            string insertQuery = String.Format("call spCadastrarProduto(@nomeProd,@imgProd,@descrProd,@preco,@estoque, @ingrediente, @fkCategoria, @qntdProd, @unMedida)");
+            string insertQuery = String.Format("call spCadastrarProduto(@nomeProd,@imgProd,@descrProd,@preco,@estoque, @ingrediente, @categoria, @qntdProd, @unMedida)");
             MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
             command.Parameters.Add("@nomeProd", MySqlDbType.VarChar).Value = vmProduto.Produto.nomeProd;
             command.Parameters.Add("@imgProd", MySqlDbType.VarChar).Value = vmProduto.Produto.imgProd;
@@ -61,7 +61,7 @@ namespace API_DragonSushi.Metodos
             command.Parameters.Add("@preco", MySqlDbType.Decimal).Value = vmProduto.Produto.preco;  
             command.Parameters.Add("@estoque", MySqlDbType.Byte).Value = vmProduto.Produto.estoque;
             command.Parameters.Add("@ingrediente", MySqlDbType.Byte).Value = vmProduto.Produto.ingrediente;
-            command.Parameters.Add("@fkCategoria", MySqlDbType.Int32).Value = vmProduto.Produto.fkCategoria;
+            command.Parameters.Add("@categoria", MySqlDbType.VarChar).Value = vmProduto.Categoria.categoria;
             command.Parameters.Add("@qntdProd", MySqlDbType.Decimal).Value = vmProduto.Produto.qntdProd;
             command.Parameters.Add("@unMedida", MySqlDbType.VarChar).Value = vmProduto.UnMedida.unMedida;
 
