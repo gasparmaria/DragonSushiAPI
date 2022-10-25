@@ -58,5 +58,16 @@ namespace API_DragonSushi.Metodos
             command.ExecuteNonQuery();
             db.desconectarDb();
         }
+
+        public void EditarCliente(ClienteViewModel vmCliente)
+        {
+            string strQuery = string.Format("CALL spEditarCliente('{0}','{1}','{2}','{3}');", vmCliente.Pessoa.idPessoa,vmCliente.Pessoa.nomePessoa,vmCliente.Pessoa.telefone,vmCliente.Pessoa.cpf );
+
+
+            using (DataBase db = new DataBase())
+            {
+                db.ExecutaComando(strQuery);
+            }
+        }
     }
 }

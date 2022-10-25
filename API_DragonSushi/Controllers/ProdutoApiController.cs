@@ -18,8 +18,8 @@ namespace API_DragonSushi.Controllers
         public IEnumerable Cardapio()
         {
 
-            ProdutoDAO produto = new ProdutoDAO();
-            var cardapio = produto.spExibirCardapio();
+            ProdutoDAO dao = new ProdutoDAO();
+            var cardapio = dao.spExibirCardapio();
 
             return cardapio;
 
@@ -27,10 +27,39 @@ namespace API_DragonSushi.Controllers
         }
 
         [HttpGet]
-        public ProdutoViewModel Get(string nomeProd)
+        public IEnumerable Estoque()
+        {
+
+            ProdutoDAO dao = new ProdutoDAO();
+            var estoque = dao.spExibirEstoque();
+
+            return estoque;
+
+
+        }
+
+        [HttpGet]
+        public ProdutoViewModel ConsultarEstoque(string nomeProd)
         {
             ProdutoDAO dao = new ProdutoDAO();
             var produto = dao.ConsultarEstoque(nomeProd);
+            return produto;
+        }
+
+        [HttpGet]
+        public ProdutoViewModel ConsultarCardapio(string nomeProd)
+        {
+            ProdutoDAO dao = new ProdutoDAO();
+            var produto = dao.ConsultarCardapio(nomeProd);
+            return produto;
+        }
+
+
+        [HttpGet]
+        public IEnumerable ConsultarCategoria(int fkCategoria)
+        {
+            ProdutoDAO dao = new ProdutoDAO();
+            var produto = dao.ConsultarCategoria(fkCategoria);
             return produto;
         }
 

@@ -22,7 +22,18 @@ namespace API_DragonSushi.Metodos
 
         }
 
-        //MÉTODO SELECT Produto
+        public List<ProdutoViewModel> spExibirEstoque()
+        {
+            DataBase db = new DataBase();
+
+            MySqlCommand exibir = new MySqlCommand("call spExibirEstoque()", db.conectarDb());
+            var leitor = exibir.ExecuteReader();
+
+            return listaEstoque(leitor);
+
+        }
+
+
         public ProdutoViewModel ConsultarEstoque(string nomeProd)
         {
             DataBase db = new DataBase();
@@ -31,6 +42,28 @@ namespace API_DragonSushi.Metodos
                 MySqlCommand exibir = new MySqlCommand(strQuery, db.conectarDb());
                 var leitor = exibir.ExecuteReader();
                 return listaEstoque(leitor).FirstOrDefault();
+            }
+        }
+
+        public ProdutoViewModel ConsultarCardapio(string nomeProd)
+        {
+            DataBase db = new DataBase();
+            {
+                string strQuery = string.Format("CALL spConsultarCardapio('{0}');", nomeProd);
+                MySqlCommand exibir = new MySqlCommand(strQuery, db.conectarDb());
+                var leitor = exibir.ExecuteReader();
+                return listaCardapio(leitor).FirstOrDefault();
+            }
+        }
+
+        public List<ProdutoViewModel> ConsultarCategoria(int fkCategoria)
+        {
+            DataBase db = new DataBase();
+            {
+                string strQuery = string.Format("CALL spExibirCategoria('{0}');", fkCategoria);
+                MySqlCommand exibir = new MySqlCommand(strQuery, db.conectarDb());
+                var leitor = exibir.ExecuteReader();
+                return listaCardapio(leitor);
             }
         }
 
