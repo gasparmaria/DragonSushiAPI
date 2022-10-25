@@ -11,42 +11,84 @@ namespace API_DragonSushi.Metodos
 {
     public class ProdutoDAO
     {
-        public List<Produto> spExibirCardapio()
+        public List<ProdutoViewModel> spExibirCardapio()
         {
             DataBase db = new DataBase();
 
             MySqlCommand exibir = new MySqlCommand("call spExibirCardapio()", db.conectarDb());
             var leitor = exibir.ExecuteReader();
 
-            return listaTodosOsDados(leitor);
+            return listaCardapio(leitor);
 
         }
 
-        public List<Produto> listaTodosOsDados(MySqlDataReader leitor)
+        //MÉTODO SELECT Produto
+        public ProdutoViewModel ConsultarEstoque(string nomeProd)
         {
-            var cardapio = new List<Produto>();
-            if (leitor.HasRows)
+            DataBase db = new DataBase();
             {
+                string strQuery = string.Format("CALL spConsultarEstoque('{0}');", nomeProd);
+                MySqlCommand exibir = new MySqlCommand(strQuery, db.conectarDb());
+                var leitor = exibir.ExecuteReader();
+                return listaEstoque(leitor).FirstOrDefault();
+            }
+        }
+
+        public List<ProdutoViewModel> listaCardapio(MySqlDataReader leitor)
+        {
+            var produto = new List<ProdutoViewModel>();
+
                 while (leitor.Read())
                 {
-                    var produto = new Produto()
+
+                    var lstProduto = new ProdutoViewModel()
                     {
+
+                        Produto = new Produto()
+                        {
+
+                            idProd = Convert.ToInt32(leitor["idProd"]),
+                            nomeProd = Convert.ToString(leitor["nomeProd"]),
+                            imgProd = Convert.ToString(leitor["imgProd"]),
+                            descrProd = Convert.ToString(leitor["descrProd"]),
+                            preco = Convert.ToDecimal(leitor["preco"]),
+                            fkCategoria = Convert.ToInt32(leitor["fkCategoria"])
+
+                        }
+                       
+                    };
+                    produto.Add(lstProduto);
+                }
+            
+            leitor.Close();
+            return produto;
+        }
+        public List<ProdutoViewModel> listaEstoque(MySqlDataReader leitor)
+        {
+            var produto = new List<ProdutoViewModel>();
+
+            while (leitor.Read())
+            {
+
+                var lstProduto = new ProdutoViewModel()
+                {
+
+                    Produto = new Produto()
+                    {
+
                         idProd = Convert.ToInt32(leitor["idProd"]),
                         nomeProd = Convert.ToString(leitor["nomeProd"]),
-                        imgProd = Convert.ToString(leitor["imgProd"]),
-                        descrProd = Convert.ToString(leitor["descrProd"]),
-                        preco = Convert.ToDecimal(leitor["preco"]),
-                        estoque = Convert.ToBoolean(leitor["estoque"]),
-                        ingrediente = Convert.ToBoolean(leitor["ingrediente"]),
-                        fkCategoria = Convert.ToInt32(leitor["fkCategoria"]),
-                        qntdProd = 0,
-                        fkUnMedida = 0
-                    };
-                    cardapio.Add(produto);
-                }
+                        qtdProd = Convert.ToDecimal(leitor["qntdProd"]),
+                        fkUnMedida = Convert.ToInt32(leitor["fkUnMedida"])
+
+                    }
+
+                };
+                produto.Add(lstProduto);
             }
+
             leitor.Close();
-            return cardapio;
+            return produto;
         }
 
         public void cadastrarProduto(ProdutoViewModel vmProduto)
@@ -62,7 +104,7 @@ namespace API_DragonSushi.Metodos
             command.Parameters.Add("@estoque", MySqlDbType.Byte).Value = vmProduto.Produto.estoque;
             command.Parameters.Add("@ingrediente", MySqlDbType.Byte).Value = vmProduto.Produto.ingrediente;
             command.Parameters.Add("@categoria", MySqlDbType.VarChar).Value = vmProduto.Categoria.categoria;
-            command.Parameters.Add("@qntdProd", MySqlDbType.Decimal).Value = vmProduto.Produto.qntdProd;
+            command.Parameters.Add("@qntdProd", MySqlDbType.Decimal).Value = vmProduto.Produto.qtdProd;
             command.Parameters.Add("@unMedida", MySqlDbType.VarChar).Value = vmProduto.UnMedida.unMedida;
 
             command.ExecuteNonQuery();

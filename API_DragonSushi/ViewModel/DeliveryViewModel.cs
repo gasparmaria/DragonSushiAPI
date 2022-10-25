@@ -8,6 +8,7 @@ namespace API_DragonSushi.ViewModel
 {
     public class DeliveryViewModel
     {
+        public Delivery Delivery { get; set; }
         public Pessoa Pessoa { get; set; }
         public Endereco Endereco { get; set; }
         public Comanda Comanda { get; set; }

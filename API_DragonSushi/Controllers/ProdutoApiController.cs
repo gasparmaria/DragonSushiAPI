@@ -25,6 +25,15 @@ namespace API_DragonSushi.Controllers
 
 
         }
+
+        [HttpGet]
+        public ProdutoViewModel Get(string nomeProd)
+        {
+            ProdutoDAO dao = new ProdutoDAO();
+            var produto = dao.ConsultarEstoque(nomeProd);
+            return produto;
+        }
+
         [HttpPost]
         public void Post([FromBody] ProdutoViewModel vmProduto)
         {

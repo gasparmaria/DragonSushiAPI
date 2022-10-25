@@ -6,13 +6,10 @@ using System.Web;
 
 namespace API_DragonSushi.ViewModel
 {
-    public class ProdutoViewModel
+    public class PedidoViewModel
     {
+        public Pedido Pedido { get; set; }
         public Produto Produto { get; set; }
-
-
-        public Categoria Categoria { get; set; }
-        public UnMedida UnMedida { get; set; }
-
+        public Comanda Comanda { get; set; }
     }
 }

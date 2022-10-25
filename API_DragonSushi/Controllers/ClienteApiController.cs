@@ -11,6 +11,14 @@ namespace API_DragonSushi.Controllers
 {
     public class ClienteApiController : ApiController
     {
+        [HttpGet]
+        public ClienteViewModel Get(string cpf)
+        {
+            ClienteDAO dao = new ClienteDAO();
+            var cliente = dao.ConsultarCliente(cpf);
+            return cliente;
+        }
+
         [HttpPost]
         public void Post([FromBody] ClienteViewModel vmCliente)
         {

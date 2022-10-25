@@ -17,7 +17,7 @@ namespace API_DragonSushi.Models
         public bool estoque { get; set; }
         public bool ingrediente { get; set; }
         public int fkCategoria { get; set; }
-        public decimal qntdProd { get; set; }
+        public decimal qtdProd { get; set; }
         public int fkUnMedida { get; set; }
 
     }

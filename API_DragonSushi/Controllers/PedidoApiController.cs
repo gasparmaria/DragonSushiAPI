@@ -1,5 +1,6 @@
 ﻿using API_DragonSushi.Metodos;
 using API_DragonSushi.Models;
+using API_DragonSushi.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,12 @@ namespace API_DragonSushi.Controllers
     public class PedidoApiController : ApiController
     {
         [HttpPost]
-        public void Post([FromBody] Pedido pedido)
+        public void Post([FromBody] PedidoViewModel pedido)
         {
             if (pedido == null)
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
 
-            DAO dao = new DAO();
+            PedidoDAO dao = new PedidoDAO();
             dao.cadastrarPedido(pedido);
         }
     }

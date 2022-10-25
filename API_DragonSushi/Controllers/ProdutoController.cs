@@ -16,7 +16,7 @@ namespace API_DragonSushi.Controllers
     {
         public ActionResult Cardapio()
         {
-            Produto produto = new Produto();
+            ProdutoDAO produto = new ProdutoDAO();
             var cardapio = produto.spExibirCardapio();
             return View(cardapio);
         }
@@ -27,7 +27,7 @@ namespace API_DragonSushi.Controllers
             if (vmProduto == null)
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
 
-            DAO dao = new DAO();
+            ProdutoDAO dao = new ProdutoDAO();
             dao.cadastrarProduto(vmProduto);
         }
     }

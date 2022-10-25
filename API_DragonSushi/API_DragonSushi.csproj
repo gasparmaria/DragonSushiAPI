@@ -174,9 +174,12 @@
     </Compile>
     <Compile Include="Metodos\ClienteDAO.cs" />
     <Compile Include="Metodos\ComandaDAO.cs" />
-    <Compile Include="Metodos\DAO.cs" />
+    <Compile Include="Metodos\DeliveryDAO.cs" />
+    <Compile Include="Metodos\EnderecoDAO.cs" />
     <Compile Include="Metodos\FuncionarioDAO.cs" />
+    <Compile Include="Metodos\PedidoDAO.cs" />
     <Compile Include="Metodos\ProdutoDAO.cs" />
+    <Compile Include="Metodos\ReservaDAO.cs" />
     <Compile Include="Metodos\UsuarioDAO.cs" />
     <Compile Include="Models\Bairro.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -192,7 +195,6 @@
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Reserva.cs" />
-    <Compile Include="Models\Rua.cs" />
     <Compile Include="Models\UnMedida.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="ViewModel\DeliveryViewModel.cs" />
     <Compile Include="ViewModel\EnderecoViewModel.cs" />
     <Compile Include="ViewModel\FuncionarioViewModel.cs" />
+    <Compile Include="ViewModel\PedidoViewModel.cs" />
     <Compile Include="ViewModel\ProdutoViewModel.cs" />
     <Compile Include="ViewModel\ReservaViewModel.cs" />
     <Compile Include="ViewModel\UsuarioViewModel.cs" />

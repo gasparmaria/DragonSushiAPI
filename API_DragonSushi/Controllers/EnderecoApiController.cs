@@ -17,7 +17,7 @@ namespace API_DragonSushi.Controllers
             if (vmEndereco == null)
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
 
-            DAO dao = new DAO();
+            EnderecoDAO dao = new EnderecoDAO();
             dao.cadastrarEndereco(vmEndereco);
         }
 

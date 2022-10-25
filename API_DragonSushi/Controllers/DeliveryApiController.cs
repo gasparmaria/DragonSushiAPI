@@ -17,7 +17,7 @@ namespace API_DragonSushi.Controllers
             if (vmDelivery == null)
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
 
-            DAO dao = new DAO();
+            DeliveryDAO dao = new DeliveryDAO();
             dao.cadastrarDelivery(vmDelivery);
         }
     }

@@ -9,6 +9,8 @@ namespace API_DragonSushi.Models
     {
         public int idDelivery { get; set; }
         public DateTime dataDelivery { get; set; }
+        public string numEndereco { get; set; }
+        public string descrEndereco { get; set; }
         public int fkPessoa { get; set; }
         public int fkEndereco { get; set; }
         public int fkComanda { get; set; }
