@@ -8,6 +8,7 @@ namespace API_DragonSushi.Models
     public class UnMedida
     {
         public int idUnMedida { get; set; }
+
         public string unMedida { get; set; }
     }
 }

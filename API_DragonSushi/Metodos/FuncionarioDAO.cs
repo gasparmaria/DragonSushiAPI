@@ -11,7 +11,7 @@ namespace API_DragonSushi.Metodos
 {
     public class FuncionarioDAO
     {
-        //MÉTODO INSERT FUNCIONARIO
+        // CADASTRAR FUNCIONÁRIO
         public void cadastrarFuncionario(FuncionarioViewModel vmFuncionario)
         {
             DataBase db = new DataBase();
@@ -27,7 +27,8 @@ namespace API_DragonSushi.Metodos
             command.ExecuteNonQuery();
             db.desconectarDb();
         }
-        //MÉTODO SELECT FUNCIONARIO PELO NOME
+
+        // CONSULTAR FUNCIONÁRIO PELO NOME
         public FuncionarioViewModel ConsultarFuncionarioPeloNome(string nomePessoa)
         {
             DataBase db = new DataBase();
@@ -38,6 +39,8 @@ namespace API_DragonSushi.Metodos
                 return GerarListaFuncionario(leitor).FirstOrDefault();
             }
         }
+
+        // GERADOR DE LISTA
         public List<FuncionarioViewModel> GerarListaFuncionario(MySqlDataReader leitor)
         {
             var funcionario = new List<FuncionarioViewModel>();
@@ -50,7 +53,7 @@ namespace API_DragonSushi.Metodos
                     {
                         nomePessoa = leitor["nomePessoa"].ToString(),
                         telefone = leitor["telefone"].ToString(),
-                        cpf = leitor["cpf"].ToString(),
+                        cpf = leitor["cpf"].ToString()
                     }
                 };
                 funcionario.Add(lstFuncionario);

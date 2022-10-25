@@ -11,6 +11,7 @@ namespace API_DragonSushi.Metodos
 {
     public class PedidoDAO
     {
+        // CADASTRAR PEDIDO
         public void cadastrarPedido(PedidoViewModel vmPedido)
         {
             DataBase db = new DataBase();
@@ -21,7 +22,6 @@ namespace API_DragonSushi.Metodos
             command.Parameters.Add("@descrPedido", MySqlDbType.VarChar).Value = vmPedido.Pedido.descrPedido;
             command.Parameters.Add("@idProd", MySqlDbType.Int32).Value = vmPedido.Produto.idProd;
             command.Parameters.Add("@idComanda", MySqlDbType.Int32).Value = vmPedido.Comanda.idComanda;
-
 
             command.ExecuteNonQuery();
             db.desconectarDb();

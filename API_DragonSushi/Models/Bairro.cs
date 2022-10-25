@@ -8,6 +8,7 @@ namespace API_DragonSushi.Models
     public class Bairro
     {
         public int idBairro { get; set; }
+
         public string bairro { get; set; }
     }
 }

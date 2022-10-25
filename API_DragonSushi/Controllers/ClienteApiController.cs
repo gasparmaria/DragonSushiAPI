@@ -11,14 +11,7 @@ namespace API_DragonSushi.Controllers
 {
     public class ClienteApiController : ApiController
     {
-        [HttpGet]
-        public ClienteViewModel Get(string cpf)
-        {
-            ClienteDAO dao = new ClienteDAO();
-            var cliente = dao.ConsultarCliente(cpf);
-            return cliente;
-        }   
-
+        // CADASTRAR CLIENTE
         [HttpPost]
         public void Post([FromBody] ClienteViewModel vmCliente)
         {
@@ -29,6 +22,7 @@ namespace API_DragonSushi.Controllers
             dao.cadastrarCliente(vmCliente);
         }
 
+        // EDITAR CLIENTE
         public void EditarCliente(int idPessoa, [FromBody] ClienteViewModel vmCliente)
         {
             if (vmCliente == null)
@@ -37,5 +31,14 @@ namespace API_DragonSushi.Controllers
             ClienteDAO dao = new ClienteDAO();
             dao.EditarCliente(vmCliente);
         }
+
+        // CONSULTAR CLIENTE PELO CPF
+        [HttpGet]
+        public ClienteViewModel Get(string cpf)
+        {
+            ClienteDAO dao = new ClienteDAO();
+            var cliente = dao.ConsultarCliente(cpf);
+            return cliente;
+        }   
     }
 }

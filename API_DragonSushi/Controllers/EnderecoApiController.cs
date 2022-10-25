@@ -11,6 +11,7 @@ namespace API_DragonSushi.Controllers
 {
     public class EnderecoApiController : ApiController
     {
+        // CADASTRAR ENDEREÇO
         [HttpPost]
         public void Post([FromBody] EnderecoViewModel vmEndereco)
         {
@@ -20,6 +21,5 @@ namespace API_DragonSushi.Controllers
             EnderecoDAO dao = new EnderecoDAO();
             dao.cadastrarEndereco(vmEndereco);
         }
-
     }
 }

@@ -12,26 +12,7 @@ namespace API_DragonSushi.Controllers
 {
     public class ReservaApiController : ApiController
     {
-        [HttpGet]
-        public IEnumerable Reserva(DateTime data)
-        {
-
-            ReservaDAO dao = new ReservaDAO();
-            var reserva = dao.ExibirReserva(data);
-
-            return reserva;
-
-
-        }
-
-        [HttpGet]
-        public ReservaViewModel ConsultarReserva(string cpf)
-        {
-            ReservaDAO dao = new ReservaDAO();
-            var reserva = dao.ConsultarReserva(cpf);
-            return reserva;
-        }
-
+        // CADASTRAR RESERVA
         [HttpPost]
         public void Post([FromBody] ReservaViewModel vmReserva)
         {
@@ -40,6 +21,25 @@ namespace API_DragonSushi.Controllers
 
             ReservaDAO dao = new ReservaDAO();
             dao.cadastrarReserva(vmReserva);
+        }
+
+        // LISTAR RESERVAS PELA DATA
+        [HttpGet]
+        public IEnumerable Reserva(DateTime data)
+        {
+            ReservaDAO dao = new ReservaDAO();
+            var reserva = dao.ExibirReserva(data);
+
+            return reserva;
+        }
+
+        // CONSULTAR RESERVA PELO CPF DO CLIENTE
+        [HttpGet]
+        public ReservaViewModel ConsultarReserva(string cpf)
+        {
+            ReservaDAO dao = new ReservaDAO();
+            var reserva = dao.ConsultarReserva(cpf);
+            return reserva;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace API_DragonSushi.ViewModel
     public class FuncionarioViewModel
     {
         public Usuario Usuario { get; set; }
+
         public Pessoa Pessoa { get; set; }
     }
 }

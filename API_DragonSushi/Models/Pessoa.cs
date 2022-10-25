@@ -7,14 +7,14 @@ namespace API_DragonSushi.Models
 {
     public class Pessoa
     {
-        public Pessoa()
-        {
-        }
-
         public int idPessoa { get; set; }
+
         public string nomePessoa { get; set; }
+
         public string telefone { get; set; }
+
         public string cpf { get; set; }
+
         public int ocupacao { get; set; }
     }
 }

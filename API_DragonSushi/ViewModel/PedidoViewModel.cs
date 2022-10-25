@@ -9,7 +9,9 @@ namespace API_DragonSushi.ViewModel
     public class PedidoViewModel
     {
         public Pedido Pedido { get; set; }
+
         public Produto Produto { get; set; }
+
         public Comanda Comanda { get; set; }
     }
 }

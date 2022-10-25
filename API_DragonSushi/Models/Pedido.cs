@@ -8,9 +8,13 @@ namespace API_DragonSushi.Models
     public class Pedido
     {
         public int idPedido { get; set; }
+
         public int qtdProd { get; set; }
+
         public string descrPedido { get; set; }
+
         public int fkProd { get; set; }
+
         public int fkComanda { get; set; }
     }
 }
