@@ -29,6 +29,7 @@ namespace API_DragonSushi.Metodos
         // EDITAR CLIENTE
         public void EditarCliente(ClienteViewModel vmCliente)
         {
+<<<<<<< HEAD
             DataBase db = new DataBase();
             string updateQuery = String.Format("CALL spEditarCliente(@idPessoa,@nomePessoa,@telefone,@cpf)");
 
@@ -53,6 +54,16 @@ namespace API_DragonSushi.Metodos
 
             }
         }
+=======
+            string strQuery = string.Format("CALL spEditarCliente('{0}','{1}','{2}','{3}');", vmCliente.Pessoa.idPessoa,vmCliente.Pessoa.nomePessoa,vmCliente.Pessoa.telefone,vmCliente.Pessoa.cpf );
+
+            using (DataBase db = new DataBase())
+            {
+                db.ExecutaComando(strQuery);
+            }
+        }
+
+>>>>>>> 2a3dc8ec035c09d63b1a36c887010c0ddf302f15
         // CONSULTAR CLIENTE PELO CPF
         public ClienteViewModel ConsultarCliente(string cpf)
         {
@@ -86,5 +97,9 @@ namespace API_DragonSushi.Metodos
             leitor.Close();
             return cliente;
         }
+<<<<<<< HEAD
     }   
+=======
+    }
+>>>>>>> 2a3dc8ec035c09d63b1a36c887010c0ddf302f15
 }

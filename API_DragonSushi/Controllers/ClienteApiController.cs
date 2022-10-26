@@ -23,7 +23,10 @@ namespace API_DragonSushi.Controllers
         }
 
         // EDITAR CLIENTE
+<<<<<<< HEAD
         [HttpPut]
+=======
+>>>>>>> 2a3dc8ec035c09d63b1a36c887010c0ddf302f15
         public void EditarCliente(int idPessoa, [FromBody] ClienteViewModel vmCliente)
         {
             ClienteDAO dao = new ClienteDAO();
