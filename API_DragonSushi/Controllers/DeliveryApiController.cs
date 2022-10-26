@@ -11,6 +11,7 @@ namespace API_DragonSushi.Controllers
 {
     public class DeliveryApiController : ApiController
     {
+        // CADASTRAR DELIVERY
         [HttpPost]
         public void Post([FromBody] DeliveryViewModel vmDelivery)
         {

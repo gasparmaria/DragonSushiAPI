@@ -8,7 +8,9 @@ namespace API_DragonSushi.Models
     public class Comanda
     {
         public int idComanda { get; set; }
+
         public int numMesa { get; set; }
+
         public bool statusComanda { get; set; }
     }
 }

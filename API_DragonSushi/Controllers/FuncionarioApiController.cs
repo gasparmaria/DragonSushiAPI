@@ -12,14 +12,7 @@ namespace API_DragonSushi.Controllers
 {
     public class FuncionarioApiController : ApiController
     {
-        [HttpGet]
-        public FuncionarioViewModel Get(string nomePessoa)
-        {
-            FuncionarioDAO dao = new FuncionarioDAO();
-            var funcionario = dao.ConsultarFuncionarioPeloNome(nomePessoa);
-            return funcionario;
-        }
-
+        // CADASTRAR FUNCIONÁRIO
         [HttpPost]
         public void Post([FromBody] FuncionarioViewModel vmFuncionario)
         {
@@ -28,6 +21,15 @@ namespace API_DragonSushi.Controllers
 
             FuncionarioDAO dao = new FuncionarioDAO();
             dao.cadastrarFuncionario(vmFuncionario);
+        }
+
+        // CONSULTAR FUNCIONÁRIO PELO NOME
+        [HttpGet]
+        public FuncionarioViewModel Get(string nomePessoa)
+        {
+            FuncionarioDAO dao = new FuncionarioDAO();
+            var funcionario = dao.ConsultarFuncionarioPeloNome(nomePessoa);
+            return funcionario;
         }
     }
 }

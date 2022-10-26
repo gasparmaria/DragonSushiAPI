@@ -164,7 +164,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PedidoApiController.cs" />
     <Compile Include="Controllers\ProdutoApiController.cs" />
-    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\ReservaApiController.cs" />
     <Compile Include="Controllers\UsuarioApiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

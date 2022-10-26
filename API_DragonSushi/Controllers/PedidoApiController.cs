@@ -12,6 +12,7 @@ namespace API_DragonSushi.Controllers
 {
     public class PedidoApiController : ApiController
     {
+        // CADASTRAR PEDIDO
         [HttpPost]
         public void Post([FromBody] PedidoViewModel pedido)
         {

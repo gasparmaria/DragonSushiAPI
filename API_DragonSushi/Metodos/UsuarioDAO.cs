@@ -10,7 +10,7 @@ namespace API_DragonSushi.Metodos
 {
     public class UsuarioDAO
     {
-
+        // CADASTRAR USUÁRIO
         public void cadastrarUsuario(UsuarioViewModel vmUsuario)
         {
             DataBase db = new DataBase();

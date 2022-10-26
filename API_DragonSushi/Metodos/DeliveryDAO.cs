@@ -10,6 +10,7 @@ namespace API_DragonSushi.Metodos
 {
     public class DeliveryDAO
     {
+        // CADASTRAR DELIVERY
         public void cadastrarDelivery(DeliveryViewModel vmDelivery)
         {
             DataBase db = new DataBase();

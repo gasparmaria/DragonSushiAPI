@@ -10,6 +10,7 @@ namespace API_DragonSushi.Metodos
 {
     public class EnderecoDAO
     {
+        // CADASTRAR ENDEREÇO
         public void cadastrarEndereco(EnderecoViewModel vmEndereco)
         {
             DataBase db = new DataBase();
@@ -21,7 +22,6 @@ namespace API_DragonSushi.Metodos
             command.Parameters.Add("@bairro", MySqlDbType.VarChar).Value = vmEndereco.Bairro.bairro;
             command.Parameters.Add("@cidade", MySqlDbType.VarChar).Value = vmEndereco.Cidade.cidade;
             command.Parameters.Add("@idEstado", MySqlDbType.VarChar).Value = vmEndereco.Estado.idEstado;
-
 
             command.ExecuteNonQuery();
             db.desconectarDb();

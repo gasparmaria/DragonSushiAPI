@@ -13,8 +13,6 @@ namespace API_DragonSushi.Controllers
             ViewBag.Title = "Home Page";
 
             return View();
-        }
-
-     
+        }     
     }
 }

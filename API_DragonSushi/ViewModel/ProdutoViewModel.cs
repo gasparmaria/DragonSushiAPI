@@ -10,8 +10,8 @@ namespace API_DragonSushi.ViewModel
     {
         public Produto Produto { get; set; }
 
-
         public Categoria Categoria { get; set; }
+
         public UnMedida UnMedida { get; set; }
 
     }

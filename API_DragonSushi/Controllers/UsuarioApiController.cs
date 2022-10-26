@@ -15,19 +15,7 @@ namespace API_DragonSushi.Controllers
 {
     public class UsuarioApiController : ApiController
     {
-        // GET: api/UsuarioApi
-        [HttpGet]
-        public IEnumerable ListarUsuarios()
-        {
-           
-                UsuarioViewModel vmUsuario = new UsuarioViewModel();
-                var listaUsuarios = vmUsuario.listarUsuarios();
-
-                return listaUsuarios;
-
-
-        }
-
+        // CADASTRAR USUÁRIO
         [HttpPost]
         public void Post([FromBody] UsuarioViewModel vmUsuario)
         {
@@ -37,7 +25,5 @@ namespace API_DragonSushi.Controllers
             UsuarioDAO dao = new UsuarioDAO();
             dao.cadastrarUsuario(vmUsuario);
         }
-
-
     }
 }
