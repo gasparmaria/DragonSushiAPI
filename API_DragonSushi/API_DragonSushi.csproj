@@ -162,6 +162,7 @@
     <Compile Include="Controllers\EnderecoApiController.cs" />
     <Compile Include="Controllers\FuncionarioApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PagamentoApiController.cs" />
     <Compile Include="Controllers\PedidoApiController.cs" />
     <Compile Include="Controllers\ProdutoApiController.cs" />
     <Compile Include="Controllers\ReservaApiController.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Metodos\DeliveryDAO.cs" />
     <Compile Include="Metodos\EnderecoDAO.cs" />
     <Compile Include="Metodos\FuncionarioDAO.cs" />
+    <Compile Include="Metodos\PagamentoDAO.cs" />
     <Compile Include="Metodos\PedidoDAO.cs" />
     <Compile Include="Metodos\ProdutoDAO.cs" />
     <Compile Include="Metodos\ReservaDAO.cs" />
@@ -201,6 +203,7 @@
     <Compile Include="ViewModel\DeliveryViewModel.cs" />
     <Compile Include="ViewModel\EnderecoViewModel.cs" />
     <Compile Include="ViewModel\FuncionarioViewModel.cs" />
+    <Compile Include="ViewModel\PagamentoViewModel.cs" />
     <Compile Include="ViewModel\PedidoViewModel.cs" />
     <Compile Include="ViewModel\ProdutoViewModel.cs" />
     <Compile Include="ViewModel\ReservaViewModel.cs" />
@@ -264,6 +267,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\FuncionarioApi\" />
+    <Folder Include="Views\PagamentoApi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

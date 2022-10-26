@@ -26,5 +26,17 @@ namespace API_DragonSushi.Metodos
             command.ExecuteNonQuery();
             db.desconectarDb();
         }
+
+        // EXCLUIR PEDIDO
+        public void ExcluirPedido(int id)
+        {
+            DataBase db = new DataBase();
+
+            string deleteQuery = String.Format("CALL spExcluirPedido('{0}')", id);
+            MySqlCommand command = new MySqlCommand(deleteQuery, db.conectarDb());
+            command.ExecuteNonQuery();
+
+            db.desconectarDb();
+        }
     }
 }

@@ -31,5 +31,13 @@ namespace API_DragonSushi.Controllers
             var funcionario = dao.ConsultarFuncionarioPeloNome(nomePessoa);
             return funcionario;
         }
+
+        // EXCLUIR FUNCIONÁRIO
+        [HttpDelete]
+        public void ExcluirFuncionario(int id)
+        {
+            FuncionarioDAO dao = new FuncionarioDAO();
+            dao.ExcluirFuncionario(id);
+        }
     }
 }

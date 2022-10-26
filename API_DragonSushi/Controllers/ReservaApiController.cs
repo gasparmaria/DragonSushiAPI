@@ -23,6 +23,14 @@ namespace API_DragonSushi.Controllers
             dao.cadastrarReserva(vmReserva);
         }
 
+        // EDITAR RESERVA
+        [HttpPut]
+        public void EditarReserva([FromBody] ReservaViewModel vmReserva)
+        {
+            ReservaDAO dao = new ReservaDAO();
+            dao.EditarReserva(vmReserva);
+        }
+
         // LISTAR RESERVAS PELA DATA
         [HttpGet]
         public IEnumerable Reserva(DateTime data)
@@ -40,6 +48,17 @@ namespace API_DragonSushi.Controllers
             ReservaDAO dao = new ReservaDAO();
             var reserva = dao.ConsultarReserva(cpf);
             return reserva;
+        }
+
+        // EXCLUIR RESERVA
+        [HttpDelete]
+        public ReservaViewModel ExcluirReserva(int id, string cpf)
+        {
+            ReservaDAO dao = new ReservaDAO();
+            var reserva = dao.ConsultarReserva(cpf);
+             dao.ExcluirReserva(id);
+            return reserva;
+
         }
     }
 }

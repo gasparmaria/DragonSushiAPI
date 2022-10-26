@@ -75,5 +75,33 @@ namespace API_DragonSushi.Metodos
             leitor.Close();
             return reserva;
         }
+
+        // EDITAR RESERVA
+        public void EditarReserva(ReservaViewModel vmReserva)
+        {
+            DataBase db = new DataBase();
+
+            string insertQuery = String.Format("CALL spEditarReserva(@idReserva,@dataReserva,@hora,@numPessoas)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@idReserva", MySqlDbType.Int32).Value = vmReserva.Reserva.idReserva;
+            command.Parameters.Add("@dataReserva", MySqlDbType.Date).Value = vmReserva.Reserva.dataReserva;
+            command.Parameters.Add("@hora", MySqlDbType.Time).Value = vmReserva.Reserva.hora;
+            command.Parameters.Add("@numPessoas", MySqlDbType.Int32).Value = vmReserva.Reserva.numPessoas;
+
+            command.ExecuteNonQuery();
+            db.desconectarDb();
+        }
+
+        // EXCLUIR RESERVA
+        public void ExcluirReserva(int id)
+        {
+            DataBase db = new DataBase();
+
+            string deleteQuery = String.Format("CALL spExcluirReserva('{0}')", id);
+            MySqlCommand command = new MySqlCommand(deleteQuery, db.conectarDb());
+            command.ExecuteNonQuery();
+
+            db.desconectarDb();
+        }
     }
 }

@@ -22,5 +22,13 @@ namespace API_DragonSushi.Controllers
             PedidoDAO dao = new PedidoDAO();
             dao.cadastrarPedido(pedido);
         }
+
+        // EXCLUIR PEDIDO
+        [HttpDelete]
+        public void ExcluirPedido(int id)
+        {
+            PedidoDAO dao = new PedidoDAO();
+            dao.ExcluirPedido(id);
+        }
     }
 }

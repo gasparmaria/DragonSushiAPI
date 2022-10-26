@@ -28,6 +28,18 @@ namespace API_DragonSushi.Metodos
             db.desconectarDb();
         }
 
+        // EXCLUIR FUNCIONÁRIO
+        public void ExcluirFuncionario(int id)
+        {
+            DataBase db = new DataBase();
+
+            string deleteQuery = String.Format("CALL spExcluirFuncionario('{0}')", id);
+            MySqlCommand command = new MySqlCommand(deleteQuery, db.conectarDb());
+            command.ExecuteNonQuery();
+
+            db.desconectarDb();
+        }
+
         // CONSULTAR FUNCIONÁRIO PELO NOME
         public FuncionarioViewModel ConsultarFuncionarioPeloNome(string nomePessoa)
         {

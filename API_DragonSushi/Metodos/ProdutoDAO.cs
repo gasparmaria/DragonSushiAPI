@@ -31,6 +31,46 @@ namespace API_DragonSushi.Metodos
             command.ExecuteNonQuery();
             db.desconectarDb();
         }
+        // EDITAR PRODUTO
+        public void EditarProduto(ProdutoViewModel vmProduto)
+        {
+            DataBase db = new DataBase();
+
+            if (vmProduto.Produto.ingrediente == false) { 
+                string insertQuery = String.Format("CALL spEditarProduto(@idProd,@nomeProd,@imgProd,@descrProd,@preco,@estoque, @ingrediente, @fkCategoria, @qntdProd, @unMedida)");
+                MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+                command.Parameters.Add("@idProd", MySqlDbType.Int32).Value = vmProduto.Produto.idProd;
+                command.Parameters.Add("@nomeProd", MySqlDbType.VarChar).Value = vmProduto.Produto.nomeProd;
+                command.Parameters.Add("@imgProd", MySqlDbType.VarChar).Value = vmProduto.Produto.imgProd;
+                command.Parameters.Add("@descrProd", MySqlDbType.VarChar).Value = vmProduto.Produto.descrProd;
+                command.Parameters.Add("@preco", MySqlDbType.Decimal).Value = vmProduto.Produto.preco;
+                command.Parameters.Add("@estoque", MySqlDbType.Byte).Value = vmProduto.Produto.estoque;
+                command.Parameters.Add("@ingrediente", MySqlDbType.Byte).Value = vmProduto.Produto.ingrediente;
+                command.Parameters.Add("@fkCategoria", MySqlDbType.Int32).Value = vmProduto.Produto.fkCategoria;
+                command.Parameters.Add("@qntdProd", MySqlDbType.Decimal).Value = null;
+                command.Parameters.Add("@unMedida", MySqlDbType.VarChar).Value = 0;
+
+                command.ExecuteNonQuery();
+                db.desconectarDb();
+            }
+            if(vmProduto.Produto.ingrediente == true){
+                string insertQuery = String.Format("CALL spEditarProduto(@idProd,@nomeProd,@imgProd,@descrProd,@preco,@estoque, @ingrediente, @fkCategoria, @qntdProd, @unMedida)");
+                MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+                command.Parameters.Add("@idProd", MySqlDbType.Int32).Value = vmProduto.Produto.idProd;
+                command.Parameters.Add("@nomeProd", MySqlDbType.VarChar).Value = vmProduto.Produto.nomeProd;
+                command.Parameters.Add("@imgProd", MySqlDbType.VarChar).Value = null;
+                command.Parameters.Add("@descrProd", MySqlDbType.VarChar).Value = null;
+                command.Parameters.Add("@preco", MySqlDbType.Decimal).Value = null;
+                command.Parameters.Add("@estoque", MySqlDbType.Byte).Value = vmProduto.Produto.estoque;
+                command.Parameters.Add("@ingrediente", MySqlDbType.Byte).Value = vmProduto.Produto.ingrediente;
+                command.Parameters.Add("@fkCategoria", MySqlDbType.Int32).Value = null;
+                command.Parameters.Add("@qntdProd", MySqlDbType.Decimal).Value = vmProduto.Produto.qtdProd;
+                command.Parameters.Add("@unMedida", MySqlDbType.VarChar).Value = vmProduto.UnMedida.unMedida;
+
+                command.ExecuteNonQuery();
+                db.desconectarDb();
+            }
+        }
 
         // LISTAR PRODUTOS DO CARDÁPIO
         public List<ProdutoViewModel> ExibirCardapio()

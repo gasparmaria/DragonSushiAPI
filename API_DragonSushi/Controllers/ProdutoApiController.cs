@@ -24,6 +24,14 @@ namespace API_DragonSushi.Controllers
             dao.CadastrarProduto(vmProduto);
         }
 
+        // EDITAR PRODUTO
+        [HttpPut]
+        public void EditarProduto([FromBody] ProdutoViewModel vmProduto)
+        {
+            ProdutoDAO dao = new ProdutoDAO();
+            dao.EditarProduto(vmProduto);
+        }
+
         // LISTAR PRODUTOS DO CARDÁPIO
         [HttpGet]
         public IEnumerable Cardapio()
