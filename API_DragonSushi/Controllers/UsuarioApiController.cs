@@ -25,5 +25,14 @@ namespace API_DragonSushi.Controllers
             UsuarioDAO dao = new UsuarioDAO();
             dao.cadastrarUsuario(vmUsuario);
         }
+
+        // CONSULTAR USUARIO PELO LOGIN
+        [HttpGet]
+        public UsuarioViewModel ConsultarUsuario(string login)
+        {
+            UsuarioDAO dao = new UsuarioDAO();
+            var usuario = dao.ConsultarUsuario(login);
+            return usuario;
+        }
     }
 }
