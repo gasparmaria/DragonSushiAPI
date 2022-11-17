@@ -38,5 +38,52 @@ namespace API_DragonSushi.Metodos
 
             db.desconectarDb();
         }
+
+        public List<PedidoViewModel> ListarPedido(int comanda)
+        {
+            DataBase db = new DataBase();
+
+            string strQuery = String.Format("CALL spPedidosComanda('{0}')", comanda);
+            MySqlCommand exibir = new MySqlCommand(strQuery, db.conectarDb());
+            var leitor = exibir.ExecuteReader();
+
+            return listaPedido(leitor);
+        }
+
+        // GERADOR DE LISTA
+        public List<PedidoViewModel> listaPedido(MySqlDataReader leitor)
+        {
+            var pedido = new List<PedidoViewModel>();
+
+            while (leitor.Read())
+            {
+                var lstPedido = new PedidoViewModel()
+                {
+                    Pedido = new Pedido()
+                    {
+                        idPedido = Convert.ToInt32(leitor["idPedido"]),
+                        qtdProd = Convert.ToInt32(leitor["qtdProd"]),
+                        descrPedido = Convert.ToString(leitor["descrPedido"])
+                    },
+                    Comanda = new Comanda()
+                    {
+                        idComanda = Convert.ToInt32(leitor["fkComanda"])
+                    },
+                    Produto = new Produto()
+                    {
+                        idProd = Convert.ToInt32(leitor["fkProd"]),
+                        nomeProd = Convert.ToString(leitor["nomeProd"]),
+                        imgProd = Convert.ToString(leitor["imgProd"])
+
+                    }
+                };
+                pedido.Add(lstPedido);
+            }
+
+            leitor.Close();
+            return pedido;
+        }
+
+
     }
 }

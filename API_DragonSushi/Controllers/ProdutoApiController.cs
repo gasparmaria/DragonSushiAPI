@@ -44,20 +44,20 @@ namespace API_DragonSushi.Controllers
 
         // LISTAR CARDÁPIO ATRAVÉS DA CATEGORIA
         [HttpGet]
-        public IEnumerable ConsultarCategoria(int fkCategoria)
+        public List<ProdutoViewModel> ConsultarCategoria(int fkCategoria)
         {
             ProdutoDAO dao = new ProdutoDAO();
             var produto = dao.ConsultarCategoria(fkCategoria);
-            return produto;
+            return produto.ToList();
         }
 
         // CONSULTAR CARDÁPIO PELO NOME DO PRODUTO
         [HttpGet]
-        public ProdutoViewModel ConsultarCardapio(string nomeProd)
+        public List<ProdutoViewModel> ConsultarCardapio(string nomeProd)
         {
             ProdutoDAO dao = new ProdutoDAO();
             var produto = dao.ConsultarCardapio(nomeProd);
-            return produto;
+            return produto.ToList();
         }
 
         // LISTAR PRODUTOS DO ESTOQUE

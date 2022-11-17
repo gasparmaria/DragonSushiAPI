@@ -96,14 +96,14 @@ namespace API_DragonSushi.Metodos
         }
 
         // CONSULTAR CARDÁPIO PELO NOME DO PRODUTO
-        public ProdutoViewModel ConsultarCardapio(string nomeProd)
+        public List<ProdutoViewModel> ConsultarCardapio(string nomeProd)
         {
             DataBase db = new DataBase();
             {
                 string strQuery = string.Format("CALL spConsultarCardapio('{0}');", nomeProd);
                 MySqlCommand exibir = new MySqlCommand(strQuery, db.conectarDb());
                 var leitor = exibir.ExecuteReader();
-                return listaCardapio(leitor).FirstOrDefault();
+                return listaCardapio(leitor);
             }
         }
 

@@ -56,7 +56,7 @@ namespace API_DragonSushi.Metodos
                     },
                     Pessoa = new Pessoa()
                     {
-                        idPessoa = Convert.ToInt32(leitor["idUsuario"]),
+                        idPessoa = Convert.ToInt32(leitor["fkPessoa"]),
                         nomePessoa = Convert.ToString(leitor["nomePessoa"]),
                         telefone = Convert.ToString(leitor["telefone"]),
                         cpf = Convert.ToString(leitor["cpf"]),
@@ -67,6 +67,23 @@ namespace API_DragonSushi.Metodos
 
             leitor.Close();
             return usuario;
+        }
+
+        public void editarUsuario(UsuarioViewModel vmUsuario)
+        {
+            DataBase db = new DataBase();
+
+            string insertQuery = String.Format("call spEditarUsuario(@idusuario,@idpessoa,@nomePessoa,@telefone,@login,@senha)");
+            MySqlCommand command = new MySqlCommand(insertQuery, db.conectarDb());
+            command.Parameters.Add("@idusuario", MySqlDbType.Int32).Value = vmUsuario.Usuario.idUsuario;
+            command.Parameters.Add("@idpessoa", MySqlDbType.Int32).Value = vmUsuario.Pessoa.idPessoa;
+            command.Parameters.Add("@nomePessoa", MySqlDbType.VarChar).Value = vmUsuario.Pessoa.nomePessoa;
+            command.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = vmUsuario.Pessoa.telefone;
+            command.Parameters.Add("@login", MySqlDbType.VarChar).Value = vmUsuario.Usuario.login;
+            command.Parameters.Add("@senha", MySqlDbType.VarChar).Value = vmUsuario.Usuario.senha;
+
+            command.ExecuteNonQuery();
+            db.desconectarDb();
         }
     }
 }

@@ -40,5 +40,14 @@ namespace API_DragonSushi.Controllers
             var comanda = dao.ConsultarComanda(num);
             return comanda;
         }
+
+        // CONSULTAR COMANDA PELO NÚMERO
+        [HttpGet]
+        public Comanda ComandaDelivery()
+        {
+            ComandaDAO dao = new ComandaDAO();
+            var comanda = dao.ComandaDelivery();
+            return comanda;
+        }
     }
 }

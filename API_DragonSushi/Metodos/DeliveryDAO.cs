@@ -1,4 +1,5 @@
 ﻿using API_DragonSushi.Data;
+using API_DragonSushi.Models;
 using API_DragonSushi.ViewModel;
 using MySql.Data.MySqlClient;
 using System;
@@ -27,6 +28,42 @@ namespace API_DragonSushi.Metodos
 
             command.ExecuteNonQuery();
             db.desconectarDb();
+        }
+
+        // CONSULTAR Histórico de pedido PELa fkPessoa
+        public List<DeliveryViewModel> HistoricoPedido(int fkPessoa)
+        {
+            DataBase db = new DataBase();
+            {
+                string strQuery = string.Format("CALL  spHistóricoPedido('{0}');", fkPessoa);
+                MySqlCommand exibir = new MySqlCommand(strQuery, db.conectarDb());
+                var leitor = exibir.ExecuteReader();
+                return listaPedido(leitor);
+            }
+        }
+
+        public List<DeliveryViewModel> listaPedido(MySqlDataReader leitor)
+        {
+            var historico = new List<DeliveryViewModel>();
+
+            while (leitor.Read())
+            {
+                var lstHistorico = new DeliveryViewModel()
+                {
+                    Historico = new Historico()
+                    {
+                        dataDelivery = Convert.ToDateTime(leitor["dataDelivery"]),
+                        idDelivery = Convert.ToInt32(leitor["idDelivery"]),
+                        total = Convert.ToDecimal(leitor["total"]),
+                        formaPag = Convert.ToString(leitor["formaPag"]),
+                        numPedidos = Convert.ToInt32(leitor["COUNT(p.idPedido)"])
+                    }
+                };
+                historico.Add(lstHistorico);
+            }
+
+            leitor.Close();
+            return historico;
         }
     }
 }

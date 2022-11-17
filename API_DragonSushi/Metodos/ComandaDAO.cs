@@ -45,7 +45,6 @@ namespace API_DragonSushi.Metodos
                 return listaComanda(leitor).FirstOrDefault();
             }
         }
-
         // GERADOR DE LISTA
         public List<Comanda> listaComanda(MySqlDataReader leitor)
         {
@@ -58,12 +57,43 @@ namespace API_DragonSushi.Metodos
                     idComanda = Convert.ToInt32(leitor["idComanda"]),
                     numMesa = Convert.ToInt32(leitor["numMesa"]),
                     statusComanda = Convert.ToBoolean(leitor["statusComanda"])
-                };                
+                };
                 comanda.Add(lstComanda);
             }
 
             leitor.Close();
             return comanda;
+        }
+
+        // GERADOR DE LISTA NULA
+        public List<Comanda> listaComandaNula()
+        {
+            var comanda = new List<Comanda>();
+
+            var lstComanda = new Comanda()
+            {
+                idComanda = 0,
+                numMesa = 0,
+                statusComanda = true
+            };
+            comanda.Add(lstComanda);
+
+            return comanda;
+        }
+
+        // CONSULTAR COMANDA DO DELIVERY
+        public Comanda ComandaDelivery()
+        {
+            DataBase db = new DataBase();
+            {
+                MySqlCommand exibir = new MySqlCommand("CALL spComandaDelivery(0)", db.conectarDb());
+                var leitor = exibir.ExecuteReader();
+                var item = listaComanda(leitor).FirstOrDefault();
+                if (item != null)
+                    return item;
+                else
+                    return listaComandaNula().FirstOrDefault();
+            }
         }
     }
 }

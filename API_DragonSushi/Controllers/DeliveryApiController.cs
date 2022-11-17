@@ -21,5 +21,13 @@ namespace API_DragonSushi.Controllers
             DeliveryDAO dao = new DeliveryDAO();
             dao.cadastrarDelivery(vmDelivery);
         }
+
+        [HttpGet]
+        public List<DeliveryViewModel> HistoricoPedido(int fkPessoa)
+        {
+            DeliveryDAO dao = new DeliveryDAO();
+            var historico = dao.HistoricoPedido(fkPessoa);
+            return historico.ToList();
+        }
     }
 }

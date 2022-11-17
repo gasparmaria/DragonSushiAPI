@@ -19,8 +19,7 @@ namespace API_DragonSushi.Controllers
         [HttpPost]
         public void Post([FromBody] UsuarioViewModel vmUsuario)
         {
-            if (vmUsuario == null)
-                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+           
 
             UsuarioDAO dao = new UsuarioDAO();
             dao.cadastrarUsuario(vmUsuario);
@@ -33,6 +32,17 @@ namespace API_DragonSushi.Controllers
             UsuarioDAO dao = new UsuarioDAO();
             var usuario = dao.ConsultarUsuario(login);
             return usuario;
+        }
+
+        // EDITAR USUÁRIO
+        [System.Web.Http.HttpPut]
+        public void EditarUsuario([FromBody] UsuarioViewModel vmUsuario)
+        {
+            if (vmUsuario == null)
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.editarUsuario(vmUsuario);
         }
     }
 }

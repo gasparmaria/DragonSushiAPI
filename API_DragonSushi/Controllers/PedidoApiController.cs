@@ -30,5 +30,13 @@ namespace API_DragonSushi.Controllers
             PedidoDAO dao = new PedidoDAO();
             dao.ExcluirPedido(id);
         }
+
+        [HttpGet]
+        public List<PedidoViewModel> ConsultarPedidos(int comanda)
+        {
+            PedidoDAO dao = new PedidoDAO();
+            var pedido = dao.ListarPedido(comanda);
+            return pedido.ToList();
+        }
     }
 }

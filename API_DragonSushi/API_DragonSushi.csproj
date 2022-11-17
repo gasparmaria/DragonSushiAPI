@@ -203,6 +203,7 @@
     <Compile Include="ViewModel\DeliveryViewModel.cs" />
     <Compile Include="ViewModel\EnderecoViewModel.cs" />
     <Compile Include="ViewModel\FuncionarioViewModel.cs" />
+    <Compile Include="ViewModel\Historico.cs" />
     <Compile Include="ViewModel\PagamentoViewModel.cs" />
     <Compile Include="ViewModel\PedidoViewModel.cs" />
     <Compile Include="ViewModel\ProdutoViewModel.cs" />

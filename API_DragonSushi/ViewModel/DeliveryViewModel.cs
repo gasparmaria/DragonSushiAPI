@@ -19,5 +19,9 @@ namespace API_DragonSushi.ViewModel
         public Pagamento Pagamento { get; set; }
 
         public FormaPg FormaPg { get; set; }
+
+        public Pedido Pedido { get; set; }
+
+        public Historico Historico { get; set; }
     }
 }
