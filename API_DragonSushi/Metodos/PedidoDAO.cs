@@ -4,8 +4,6 @@ using API_DragonSushi.ViewModel;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace API_DragonSushi.Metodos
 {
@@ -63,7 +61,7 @@ namespace API_DragonSushi.Metodos
                     {
                         idPedido = Convert.ToInt32(leitor["idPedido"]),
                         qtdProd = Convert.ToInt32(leitor["qtdProd"]),
-                        descrPedido = Convert.ToString(leitor["descrPedido"])
+                        descrPedido = Convert.ToString(leitor["descrPedido"]),
                     },
                     Comanda = new Comanda()
                     {
@@ -73,7 +71,8 @@ namespace API_DragonSushi.Metodos
                     {
                         idProd = Convert.ToInt32(leitor["fkProd"]),
                         nomeProd = Convert.ToString(leitor["nomeProd"]),
-                        imgProd = Convert.ToString(leitor["imgProd"])
+                        imgProd = Convert.ToString(leitor["imgProd"]),
+                        preco = Convert.ToDecimal(leitor["preco"])
 
                     }
                 };
