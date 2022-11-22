@@ -95,5 +95,16 @@ namespace API_DragonSushi.Metodos
                     return listaComandaNula().FirstOrDefault();
             }
         }
+
+        public void LimparCarrinho(int comanda)
+        {
+            DataBase db = new DataBase();
+
+            string deleteQuery = String.Format("CALL spLimpaComanda('{0}')", comanda);
+            MySqlCommand command = new MySqlCommand(deleteQuery, db.conectarDb());
+            command.ExecuteNonQuery();
+
+            db.desconectarDb();
+        }
     }
 }

@@ -49,5 +49,12 @@ namespace API_DragonSushi.Controllers
             var comanda = dao.ComandaDelivery();
             return comanda;
         }
+
+        [HttpDelete]
+        public void LimparCarrinho(int comanda)
+        {
+            ComandaDAO dao = new ComandaDAO();
+            dao.LimparCarrinho(comanda);
+        }
     }
 }
